@@ -1,11 +1,300 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>我的第一個網站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>素雅飾品 Soya Jewels | 手工珠寶</title>
+    <style>
+        /* 基礎樣式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fdfdfd;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 頂部導航欄 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #555;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #c5a880; /* 淡金色 */
+        }
+
+        .cart-btn {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* 主橫幅區塊 (Hero Section) */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 8%;
+            min-height: 70vh;
+            background-color: #fcfbfa;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .hero-text .subtitle {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #a89274;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .hero-text h1 {
+            font-size: 2.8rem;
+            font-family: Georgia, serif;
+            font-weight: 400;
+            line-height: 1.2;
+            color: #111;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            color: #777;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid #8c765c;
+            background: none;
+            color: #8c765c;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .hero-btn:hover {
+            background-color: #8c765c;
+            color: #fff;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 占位圖樣式，模擬圖中的金色蝴蝶結飾品 */
+        .hero-image .bow-placeholder {
+            font-size: 8rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* 商品列表區塊 */
+        .products-section {
+            padding: 60px 8%;
+            background-color: #ffffff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 40px;
+            color: #222;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #f2f2f2;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: #a89274;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #c5a880;
+        }
+
+        /* 頁腳 */
+        footer {
+            background-color: #f7f5f2;
+            padding: 40px 8%;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            border-top: 1px solid #eaeaea;
+            margin-top: 5px;
+        }
+
+        /* RWD 手機版優化 */
+        @media (max-width: 768px) {
+            header { padding: 15px 5%; }
+            nav { display: none; } /* 簡化手機版導航 */
+            .hero { flex-direction: column; text-align: center; padding: 40px 5%; }
+            .hero-text { margin-bottom: 40px; }
+            .hero-text h1 { font-size: 2.2rem; }
+        }
+    </style>
 </head>
 <body>
-    <h1>大豆網站測試成功！</h1>
-    <p>這是經由 GitHub 自動部署到 Cloudflare Pages 的網頁。</p>
+
+    <!-- 頂部導航欄 -->
+    <header>
+        <div class="logo">SOYA JEWELS</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">About</a>
+        </nav>
+        <button class="cart-btn" onclick="alert('購物車功能已就緒！')">
+            Cart <span id="cart-count" style="background:#333; color:#fff; padding:2px 7px; border-radius:50%; font-size:0.75rem;">0</span>
+        </button>
+    </header>
+
+    <!-- 主橫幅區塊 -->
+    <section class="hero">
+        <div class="hero-text">
+            <span class="subtitle">Handcrafted Jewelry</span>
+            <h1>Each piece, a quiet story</h1>
+            <p>Handcrafted jewelry, made with intention.</p>
+            <a href="#" class="hero-btn">Explore Collection</a>
+        </div>
+        <div class="hero-image">
+            <!-- 這裡使用 Emoji 緞帶暫代圖片中精緻的金蝴蝶結，之後你可以用 <img> 標籤替換成真實商品圖 -->
+            <span class="bow-placeholder">🎀</span>
+        </div>
+    </section>
+
+    <!-- 精選商品列表區塊 -->
+    <section class="products-section">
+        <h2 class="section-title">Featured Collection</h2>
+        <div class="product-grid">
+            <!-- 商品 1 -->
+            <div class="product-card">
+                <span class="product-img">🎀</span>
+                <h3 class="product-title">優雅復古蝴蝶結耳環</h3>
+                <div class="product-price">NT$ 1,280</div>
+                <button class="add-to-cart" onclick="updateCart()">加入購物車</button>
+            </div>
+            <!-- 商品 2 -->
+            <div class="product-card">
+                <span class="product-img">✨</span>
+                <h3 class="product-title">極簡手工微光純銀項鍊</h3>
+                <div class="product-price">NT$ 1,580</div>
+                <button class="add-to-cart" onclick="updateCart()">加入購物車</button>
+            </div>
+            <!-- 商品 3 -->
+            <div class="product-card">
+                <span class="product-img">💍</span>
+                <h3 class="product-title">天然溫潤珍珠手工戒指</h3>
+                <div class="product-price">NT$ 1,450</div>
+                <button class="add-to-cart" onclick="updateCart()">加入購物車</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁腳 -->
+    <footer>
+        <p>&copy; 2026 Soya Jewels 素雅飾品. 版權所有. Designed with intention.</p>
+    </footer>
+
+    <!-- 簡單的互動點擊腳本 -->
+    <script>
+        let count = 0;
+        function updateCart() {
+            count++;
+            document.getElementById('cart-count').innerText = count;
+            alert('已成功將商品加入您的購物車！');
+        }
+    </script>
 </body>
 </html>
